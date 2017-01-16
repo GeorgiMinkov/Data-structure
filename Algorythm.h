@@ -1,26 +1,28 @@
 #pragma once
 #include "HuffmanTree.h"
-#include <string>
-#include <queue> // make priority_queue
-#include <functional>
-#include <algorithm>
+#include "MinHeap.hpp"
+//#include <string>
+//#include <iostream>
+// #include <fstream>
 
-struct great;
+void menu();
+void mainProgram();
+void startArchive(const std::string &src);
 
 void lego(std::string src);
 void makeTable(std::string src, DynamicTable<char, std::size_t> &table);
-void makePriorityQueue(std::priority_queue<Node *, std::vector<Node *>, great> &queue, DynamicTable<char, std::size_t> table);
-void makeHuffmanTree(std::priority_queue<Node *, std::vector<Node *>, great> queue, HuffmanTree &tree);
+void makeMinimumHeap(MinHeap<Node *> &heap, DynamicTable<char, std::size_t> table);
+void makeHuffmanTree(MinHeap<Node *> heap, HuffmanTree &tree);
+
 // ENCODING FUNCTION
 void encodeSymbols(Node *node, DynamicTable<char, std::string> &table, std::string code);
 int binToDec(std::string str);
-void transferBitsToDec(std::string code, std::string &res);
-void decodeSymbols(std::string code, const Node *node, std::string &res, const Node *startNode);
+void readFileInputData(const std::string &fileName, std::string &str);
+// WRITE ENCODED DATA TO FILE
+void archive(const std::size_t &lastNumberSize, std::string decStr, std::string &fileName);
 
-struct great
-{
-	bool operator()(const Node *lhs, const Node *rhs)
-	{
-		return *lhs > *rhs;
-	}
-};
+// DECODING FUNCTIONS
+std::string decToBin(int number); // измисли как ще изглежда
+void transferBitsToDec(std::string code, std::string &res, std::size_t &lastSizeNumber);
+void decodeSymbols(std::string code, const Node *node, std::string &res, const Node *startNode);
+void decodeSymbolsFromFile(const std::string &fileName, std::string &res); // from file with dec code convert to bin code

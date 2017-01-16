@@ -1,5 +1,7 @@
 #pragma once
 #include <iomanip>
+#include <fstream>
+#include <string>
 #include "Node.h"
 #include "DynamicTable.hpp"
 
@@ -9,6 +11,9 @@ class HuffmanTree
 
 	void copy(const Node *sourceRoot, Node *& destinyRoot);
 	void destroy(Node *& root);
+
+	void loadTreeFromFile(Node *&root, std::ifstream &fi);
+	bool getElement(std::ifstream &fi, Pair<char, std::size_t> &pair, bool &isPair);
 public:
 	HuffmanTree();
 	HuffmanTree(Node *&src);
@@ -17,8 +22,8 @@ public:
 
 	HuffmanTree &operator=(const HuffmanTree &src);
 
-	void assignLeft(Node *src);
-	void assignRight(Node *src);
+	//void assignLeft(Node *src);
+	//void assignRight(Node *src);
 
 	bool isLeaf(const Node *node) const;
 	Node *getRoot() const;
@@ -28,4 +33,7 @@ public:
 	friend std::ostream &operator<<(std::ostream &out, const HuffmanTree &src);
 
 	void print(const Node *node, const int &level);
+
+	void saveInFile(Node *root, std::ostream &fo);
+	void loadTreeFromFile(std::ifstream &fi);
 };

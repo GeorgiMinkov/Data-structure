@@ -48,7 +48,7 @@ inline Pair<FirstType, SecondType> & Pair<FirstType, SecondType>::operator=(cons
 template <typename FriendFirstType, typename FriendSecondType>
 std::ostream &operator<<(std::ostream &out, const Pair<FriendFirstType, FriendSecondType> &src)
 {
-	out << src.firstArgument << " " << src.secondArgument << " ";
+	out << src.firstArgument << " " << src.secondArgument;
 
 	return out;
 }

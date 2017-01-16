@@ -17,12 +17,34 @@ Node::Node(const Pair<char, std::size_t> data, Node * leftNode, Node * rightNode
 
 bool operator<(const Node & lhs, const Node & rhs)
 {
-	return lhs.data.secondArgument < rhs.data.secondArgument && lhs.data.firstArgument < rhs.data.firstArgument;
+	if (lhs.data.secondArgument < rhs.data.secondArgument)
+	{
+		return true;
+	}
+	else if (lhs.data.secondArgument == rhs.data.secondArgument)
+	{
+		return lhs.data.firstArgument < rhs.data.firstArgument;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool operator<=(const Node & lhs, const Node & rhs)
 {
-	return lhs.data.secondArgument <= rhs.data.secondArgument;
+	if (lhs.data.secondArgument < rhs.data.secondArgument)
+	{
+		return true;
+	}
+	else if (lhs.data.secondArgument == rhs.data.secondArgument)
+	{
+		return lhs.data.firstArgument <= rhs.data.firstArgument;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 bool operator>(const Node & lhs, const Node & rhs)
@@ -37,7 +59,7 @@ bool operator>=(const Node & lhs, const Node & rhs)
 
 bool operator==(const Node & lhs, const Node & rhs)
 {
-	return lhs.data.secondArgument == rhs.data.secondArgument;
+	return lhs.data.secondArgument == rhs.data.secondArgument && lhs.data.firstArgument == rhs.data.firstArgument;
 }
 
 bool operator!=(const Node & lhs, const Node & rhs)

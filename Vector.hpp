@@ -27,9 +27,13 @@ public:
 
 	// Element access
 	Type &operator[](const int  &index);
+	const Type &operator[](const int &index) const;
 	Type &at(const int &index);
+	const Type &at(const int &index) const;
 	Type &front();
+	const Type &front() const;
 	Type &back();
+	const Type &back() const;
 
 	// Modifiers
 	void push_back(const Type &value);
@@ -137,7 +141,31 @@ inline Type & Vector<Type>::operator[](const int & index)
 }
 
 template<typename Type>
+inline const Type & Vector<Type>::operator[](const int & index) const
+{
+	// DO: function[]
+	if (index < 0 || index >= this->currentSize)
+	{
+		throw "IndexException";
+	}
+
+	return this->container[index];
+}
+
+template<typename Type>
 inline Type & Vector<Type>::at(const int & index)
+{
+	// DO: function .at()
+	if (index < 0 || index >= this->currentSize)
+	{
+		throw "IndexException";
+	}
+
+	return this->container[index];
+}
+
+template<typename Type>
+inline const Type & Vector<Type>::at(const int & index) const
 {
 	// DO: function .at()
 	if (index < 0 || index >= this->currentSize)
@@ -160,7 +188,29 @@ inline Type & Vector<Type>::front()
 }
 
 template<typename Type>
+inline const Type & Vector<Type>::front() const
+{
+	if (this->currentSize == 0)
+	{
+		throw "EmptyVectorException";
+	}
+
+	return this->container[0];
+}
+
+template<typename Type>
 inline Type & Vector<Type>::back()
+{
+	if (this->currentSize == 0)
+	{
+		throw "EmptyVectorException";
+	}
+
+	return this->container[this->currentSize - 1];
+}
+
+template<typename Type>
+inline const Type & Vector<Type>::back() const
 {
 	if (this->currentSize == 0)
 	{
@@ -189,5 +239,5 @@ inline void Vector<Type>::pop_back()
 		throw "EmptyVectorException";
 	}
 
-	--(this->size);
+	--(this->currentSize);
 }

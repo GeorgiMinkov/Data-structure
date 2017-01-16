@@ -133,6 +133,11 @@ inline void DynamicTable<FirstType, SecondType>::deleteNullStr()
 template<typename FirstType, typename SecondType>
 inline void DynamicTable<FirstType, SecondType>::putCharsAndZeros()
 {
+	if (typeid(FirstType) != typeid(char))
+	{
+		return;
+	}
+
 	for (std::size_t index = 0; index < this->defaultASCII; ++index)
 	{
 		this->container[index].firstArgument = (char)index;
@@ -143,6 +148,11 @@ inline void DynamicTable<FirstType, SecondType>::putCharsAndZeros()
 template<typename FirstType, typename SecondType>
 inline void DynamicTable<FirstType, SecondType>::putCharsAndBlank()
 {
+	if (typeid(FirstType) != typeid(char) || typeid(SecondType) != typeid(std::string))
+	{
+		return;
+	}
+
 	for (std::size_t index = 0; index < this->defaultASCII; ++index)
 	{
 		this->container[index].firstArgument = (char)index;
